@@ -24,7 +24,7 @@ export const postCategoryRouter = router({
         return result.map(r=> r.category);
     }),
     getPostsByCategory: publicProcedure.input(z.object({categoryId: z.number()})).query(async ({input})=> {
-        const result = await db.select({post: posts}).from(postCategories).innerJoin(posts, eq(postCategories.postId, posts.id)).where(eq(postCategories.postId, input.categoryId));
+        const result = await db.select({post: posts}).from(postCategories).innerJoin(posts, eq(postCategories.postId, posts.id)).where(eq(postCategories.categoryId, input.categoryId));
         return result.map(r=> r.post);
     }),
 })

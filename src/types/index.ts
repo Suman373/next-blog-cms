@@ -28,3 +28,13 @@ interface PostStore {
     setError: (error:string | null) => void;
     clearError: ()=> void;
 }
+
+interface PostActionsProps {
+  postId: number;
+  slug: string;
+}
+
+interface EditPostProps {
+  post: Post;
+  assignedCategoryIds: number[];
+}

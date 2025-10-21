@@ -32,7 +32,7 @@ export default function PostsPage() {
   return (
     <div className="container mx-auto p-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">All Blog Posts</h1>
+        <h1 className="text-2xl font-semibold">All Blog Posts</h1>
         <Link href="/posts/create" className="bg-black text-sm text-white px-6 py-2 rounded-md">
           New Post
         </Link>
@@ -41,12 +41,14 @@ export default function PostsPage() {
       {/* Category Filter */}
       <div className="mb-6 flex gap-2 flex-wrap">
         <Button
+          variant={`${selectedCategory === null ? "default": "secondary"}`}
           onClick={() => setSelectedCategory(null)}
         >
           All
         </Button>
         {categories?.map(cat => (
           <Button
+            variant={`${selectedCategory === cat.id ? "default" : "secondary"}`}
             key={cat.id}
             onClick={() => setSelectedCategory(cat.id)}
           >
