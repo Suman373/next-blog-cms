@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 
 export const postRouter = router({
     getAll: publicProcedure.query(async () => {
-        return await db.select().from(posts);
+        return await db.query.posts.findMany();
     }),
     getBySlug: publicProcedure.input(z.object({ slug: z.string() }))
         .query(async ({ input }) => {

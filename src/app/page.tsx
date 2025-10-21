@@ -21,18 +21,7 @@ export default function Home() {
 
   return (
     <div className="p-8">
-      <button onClick={handleCreate} className="bg-blue-500 text-white px-4 py-2 rounded">
-        Create Test Post
-      </button>
-      <div className="mt-4">
-        <h2>Posts: {posts?.length ?? 0}</h2>
-        {posts?.map(post => (
-          <div key={post.id} className="border p-4 mt-2">
-            <h3>{post.title}</h3>
-            <p>{post.slug}</p>
-          </div>
-        ))}
-      </div>
+      Landing Page
     </div>
   );
 }
