@@ -1,12 +1,14 @@
 "use client";
 
-import MarkdownEditor from "@/components/MarkdownEditor";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc/client";
 import { usePostStore } from "@/store/postStore";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import slugify from 'slugify';
+import dynamic from "next/dynamic";
+
+const MarkdownEditor = dynamic(()=> import('@/components/MarkdownEditor'), {ssr: false}); // disabling ssr for client side execution of the editor library 
 
 export default function CreatePostPage() {
     const router = useRouter();

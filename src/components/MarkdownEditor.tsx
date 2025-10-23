@@ -8,7 +8,7 @@ import { MarkdownEditorProps } from "@/types";
 export default function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
     // options for simple mde
     const options = useMemo(() => ({
-        spellChekcer: false,
+        spellChecker: false,
         placeholder: "Write your post content",
         status: false,
         // toolbar: ["bold", "italic", "heading", "|", "quota", "unordered-list", "ordered-list", "|", "link"],
