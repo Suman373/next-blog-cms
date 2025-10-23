@@ -45,7 +45,7 @@ export default function DashboardPage() {
     <div className="container mx-auto p-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold">Dashboard</h1>
-        <Link href="/posts/create" className="bg-neutral-800 text-white px-6 py-2 rounded text-sm rounded-md">
+        <Link href="/posts/create" className="bg-neutral-800 text-white px-6 py-2 text-sm rounded-md">
           New Post
         </Link>
       </div>

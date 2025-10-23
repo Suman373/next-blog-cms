@@ -6,7 +6,7 @@ import { usePostStore } from '@/store/postStore';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import PostCard from '@/components/PostCard';
-import { PostWithCategories } from '@/types';
+import {  PostWithCategories } from '@/types';
 
 export default function PostsPage() {
   const { posts, setPosts, setLoading, isLoading } = usePostStore();
@@ -26,9 +26,11 @@ export default function PostsPage() {
     setLoading(fetchingPosts);
   }, [postsData, fetchingPosts, setPosts, setLoading]);
 
-  const displayPosts = selectedCategory
-    ? filteredPosts
-    : posts.filter((p: PostWithCategories) => p.published);
+  const publishedPosts = posts.filter(p=> p.published);
+
+  const displayPosts: PostWithCategories[] | undefined = selectedCategory
+    ? (filteredPosts as PostWithCategories[] | undefined)
+    : (publishedPosts as PostWithCategories[] | undefined);
 
   if (isLoading) return <div className="container mx-auto p-8">Loading...</div>;
 
