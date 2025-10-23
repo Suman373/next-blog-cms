@@ -3,6 +3,7 @@
 import { useCallback, useMemo } from "react";
 import SimpleMde from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
+import { MarkdownEditorProps } from "@/types";
 
 export default function MarkdownEditor({ value, onChange }: MarkdownEditorProps) {
     // options for simple mde

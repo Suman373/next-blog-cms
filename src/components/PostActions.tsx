@@ -1,10 +1,10 @@
 'use client';
 
-
 import { trpc } from '@/lib/trpc/client';
 import { useRouter } from 'next/navigation';
 import { usePostStore } from '@/store/postStore';
 import { Pencil, Trash2 } from 'lucide-react';
+import { PostActionsProps } from '@/types';
 
 export default function PostActions({ postId, slug }: PostActionsProps) {
   const router = useRouter();
@@ -26,14 +26,14 @@ export default function PostActions({ postId, slug }: PostActionsProps) {
     <div className="flex gap-2">
       <button
         onClick={() => router.push(`/posts/${slug}/edit`)}
-        className="p-2 text-blue-600 hover:bg-blue-50 rounded"
+        className="p-2 text-gray-600 hover:bg-blue-50 rounded"
         title="Edit"
       >
         <Pencil size={20} />
       </button>
       <button
         onClick={handleDelete}
-        className="p-2 text-red-600 hover:bg-red-50 rounded"
+        className="p-2 text-gray-600 hover:bg-red-50 rounded"
         title="Delete"
         disabled={deletePostMutation.isPending}
       >

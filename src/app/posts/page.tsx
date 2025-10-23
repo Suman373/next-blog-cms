@@ -1,15 +1,18 @@
 'use client';
+
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc/client';
 import { usePostStore } from '@/store/postStore';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import PostCard from '@/components/PostCard';
+import { PostWithCategories } from '@/types';
 
 export default function PostsPage() {
   const { posts, setPosts, setLoading, isLoading } = usePostStore();
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
-  const { data: postsData, isLoading: fetchingPosts } = trpc.post.getAll.useQuery();
+  const { data: postsData, isLoading: fetchingPosts } = trpc.post.getAllWithCategories.useQuery();
   const { data: categories } = trpc.category.getAll.useQuery();
   const { data: filteredPosts } = trpc.postCategory.getPostsByCategory.useQuery(
     { categoryId: selectedCategory! },
@@ -25,7 +28,7 @@ export default function PostsPage() {
 
   const displayPosts = selectedCategory
     ? filteredPosts
-    : posts.filter(p => p.published);
+    : posts.filter((p: PostWithCategories) => p.published);
 
   if (isLoading) return <div className="container mx-auto p-8">Loading...</div>;
 
@@ -41,7 +44,7 @@ export default function PostsPage() {
       {/* Category Filter */}
       <div className="mb-6 flex gap-2 flex-wrap">
         <Button
-          variant={`${selectedCategory === null ? "default": "secondary"}`}
+          variant={`${selectedCategory === null ? "default" : "secondary"}`}
           onClick={() => setSelectedCategory(null)}
         >
           All
@@ -59,17 +62,12 @@ export default function PostsPage() {
 
       {/* Posts Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {displayPosts?.map(post => (
-          <Link key={post.id} href={`/posts/${post.slug}`}>
-            <div className="border rounded-lg p-6 hover:shadow-lg transition cursor-pointer">
-              <h2 className="text-2xl font-semibold mb-2">{post.title}</h2>
-              <p>{post.content.substring(0,100)}</p>
-              {/* <ReactMarkdown>{post.content.trim().substring(0,80)}</ReactMarkdown> */}
-              <p className="text-sm text-gray-400 mt-4">
-                {new Date(post.createdAt!).toLocaleDateString()}
-              </p>
-            </div>
-          </Link>
+        {displayPosts?.map((post: PostWithCategories, index: number) => (
+          <PostCard
+            key={index}
+            post={post}
+            showStatus={true}
+          />
         ))}
       </div>
 

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import MarkdownEditor from './MarkdownEditor';
 import slugify from 'slugify';
+import { EditPostProps } from '@/types';
 
 export default function EditPostForm({ post, assignedCategoryIds }: EditPostProps) {
   const router = useRouter();

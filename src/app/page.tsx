@@ -1,27 +1,17 @@
 'use client';
-import { trpc } from '@/lib/trpc/client';
+
+import Features from "@/components/Features";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 
 export default function Home() {
-  const utils = trpc.useUtils();
-  const { data: posts, isLoading } = trpc.post.getAll.useQuery();
-  const createPost = trpc.post.create.useMutation({
-    onSuccess: () => utils.post.getAll.invalidate(),
-  });
-
-  const handleCreate = () => {
-    createPost.mutate({
-      title: "Test Post",
-      content: "This is a test",
-      slug: "test-post-" + Date.now(),
-      published: false,
-    });
-  };
-
-  if (isLoading) return <div>Loading...</div>;
-
   return (
-    <div className="p-8">
-      Landing Page
-    </div>
+    <>
+      <section className="bg-white">
+        <Hero />
+        <Features/>
+      </section>
+      <Footer />
+    </>
   );
 }

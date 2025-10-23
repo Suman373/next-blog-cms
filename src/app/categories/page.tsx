@@ -128,13 +128,13 @@ export default function CategoriesPage() {
                                 <td className="px-6 py-4 text-right space-x-2">
                                     <button
                                         onClick={() => handleEdit(cat)}
-                                        className="text-blue-600 hover:text-blue-800"
+                                        className="text-gray-600 hover:text-neutral-700"
                                     >
                                         Edit
                                     </button>
                                     <button
                                         onClick={() => deleteCategory.mutate({ id: cat.id })}
-                                        className="text-red-600 hover:text-red-800"
+                                        className="text-gray-600 hover:text-neutral-700"
                                     >
                                         Delete
                                     </button>

@@ -1,12 +1,26 @@
 import { db } from "@/server/db";
 import { publicProcedure, router } from "../trpc";
-import { posts } from "@/server/db/schema";
+import { categories, postCategories, posts } from "@/server/db/schema";
 import z from "zod";
 import { eq } from "drizzle-orm";
 
 export const postRouter = router({
     getAll: publicProcedure.query(async () => {
         return await db.query.posts.findMany();
+    }),
+    getAllWithCategories: publicProcedure.query(async ()=> {
+        const allPosts = await db.select().from(posts);
+        const postsWCategories = await Promise.all(
+            allPosts.map(async(post)=> {
+                const cat = await db.select({category: categories}).from(postCategories).innerJoin(categories, eq(postCategories.categoryId, categories.id)).where(eq(postCategories.postId, post.id));
+                
+                return {
+                    ...post,
+                    categories: cat.map(c=> c.category)
+                };
+            })
+        );
+        return postsWCategories;
     }),
     getBySlug: publicProcedure.input(z.object({ slug: z.string() }))
         .query(async ({ input }) => {
