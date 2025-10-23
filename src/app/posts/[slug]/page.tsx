@@ -5,15 +5,8 @@ import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import PostActions from '@/components/PostActions';
 
-interface PostEditPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-
-export default async function PostPage({ params }: PostEditPageProps) {
-  const {slug} = params;
+export default async function PostPage({ params }: {params: Promise<{slug:string}>}) {
+  const {slug} = await params;
   const post = await db.select().from(posts).where(eq(posts.slug, slug)).then(r => r[0]);
 
   if (!post) notFound();
