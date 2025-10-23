@@ -9,8 +9,8 @@ export interface Post {
   content: string;
   slug: string;
   published: boolean | null;
-  createdAt: string | null;
-  updatedAt: string | null;
+  createdAt: string | Date | null;
+  updatedAt: string | Date | null;
 }
 
 export interface PostStore {

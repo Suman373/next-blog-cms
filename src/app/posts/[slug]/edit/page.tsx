@@ -4,12 +4,13 @@ import { eq } from 'drizzle-orm';
 import { notFound } from 'next/navigation';
 import EditPost from '@/components/EditPost';
 
-export default async function EditPostPage({ params }: { params: { slug: string } }) {
-    const post = await db.select().from(posts).where(eq(posts.slug, params.slug)).then(r => r[0]);
+export default async function EditPostPage({ params }: {params: Promise<{slug:string}>}) {
+   
+    const {slug} = await params;
+    const post = await db.select().from(posts).where(eq(posts.slug, slug)).then(r => r[0]);
 
     if (!post) notFound();
-
-    // Get assigned categories
+    
     const assignedCategories = await db
         .select({ categoryId: postCategories.categoryId })
         .from(postCategories)
