@@ -5,8 +5,16 @@ import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import PostActions from '@/components/PostActions';
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
-  const post = await db.select().from(posts).where(eq(posts.slug, params.slug)).then(r => r[0]);
+interface PostEditPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+
+export default async function PostPage({ params }: PostEditPageProps) {
+  const {slug} = params;
+  const post = await db.select().from(posts).where(eq(posts.slug, slug)).then(r => r[0]);
 
   if (!post) notFound();
 
