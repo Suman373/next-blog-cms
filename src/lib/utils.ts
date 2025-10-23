@@ -18,3 +18,9 @@ export function generateRandomRgbaColor(alpha: number = 0.15): { solid: string, 
   const lightBackground = `rgba(${r}, ${g}, ${b}, ${alpha})`;
   return { solid: solidColor, background: lightBackground };
 }
+
+export function getBaseUrl(){
+  const base = process.env.NEXT_PUBLIC_API_BASE_URL;
+  if (base) return base;
+  return "http://localhost:3000"; // fallback to localhost
+};

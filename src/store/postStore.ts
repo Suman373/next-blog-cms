@@ -1,3 +1,4 @@
+import { PostStore } from '@/types';
 import {create} from 'zustand';
 
 export const usePostStore = create<PostStore>((set)=> ({

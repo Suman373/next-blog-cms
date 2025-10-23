@@ -1,7 +1,7 @@
 import { Category, PostCardProps } from "@/types";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
-import { generateRandomHexColor, generateRandomRgbaColor } from "@/lib/utils";
+import { generateRandomRgbaColor } from "@/lib/utils";
 import { useMemo } from "react";
 
 export default function PostCard({ post, showStatus = false }: PostCardProps) {
